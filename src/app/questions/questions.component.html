@@ -1,0 +1,29 @@
+<h2>Questions</h2>
+
+<mat-vertical-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="firstFormGroup" *ngFor="let question of questions">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>{{question.text}}</ng-template>
+    </form>
+
+    <mat-form-field class="example-full-width" appearance="fill" *ngIf="question.controlType == 1" >
+      <mat-label>Answer</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      *ngIf="question.controlType == 2">
+      <mat-radio-button class="example-radio-button" *ngFor="let value of question.possibleValues" [value]="value">
+        {{value}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <section class="example-section" *ngIf="question.controlType == 3" >
+      <mat-checkbox class="example-margin">
+        Check for yes
+      </mat-checkbox>
+    </section>
+  </mat-step>
+</mat-vertical-stepper>
